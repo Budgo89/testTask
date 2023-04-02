@@ -1,3 +1,4 @@
+using _Root.Scripts.Controllers;
 using Profile;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -10,6 +11,7 @@ namespace Controllers
         private Transform _placeForUi;
         private FirebaseController _firebaseController;
         private WebViewController _webViewController;
+        private LackInternetController _lackInternetController;
 
         public MainController(ProfilePlayers profilePlayer, Transform placeForUi)
         {
@@ -39,7 +41,9 @@ namespace Controllers
                 case GameState.Plug:
                     SceneManager.LoadScene(1);
                     break;
-                   
+                case GameState.LackInternet:
+                    _lackInternetController = new LackInternetController(_placeForUi);
+                    break;
             }
         }
 
