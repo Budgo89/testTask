@@ -1,5 +1,6 @@
 using Profile;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Controllers
 {
@@ -35,15 +36,17 @@ namespace Controllers
                 case GameState.WebView:
                     _webViewController = new WebViewController(_profilePlayer, _placeForUi);
                     break;
+                case GameState.Plug:
+                    SceneManager.LoadScene(1);
+                    break;
                    
             }
         }
 
         private void DisposeControllers()
         {
-           
-
-
+            _firebaseController?.Dispose();
+            _webViewController?.Dispose();
         }
     }
 }

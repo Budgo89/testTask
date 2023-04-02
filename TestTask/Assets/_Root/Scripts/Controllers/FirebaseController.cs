@@ -34,17 +34,17 @@ namespace Controllers
         private void InitializeFirebase()
         {
             var testUrl = Firebase.RemoteConfig.FirebaseRemoteConfig.DefaultInstance.GetValue(KeyConst.TestUrlKey).StringValue;
-            if (testUrl == "")
-            {
-                _profilePlayer.CurrentState.Value = GameState.Plug;
-            }
-            if (SystemInfo.deviceModel.ToLower().Contains("google") ||
+            if (testUrl == "" || SystemInfo.deviceModel.ToLower().Contains("google") ||
                 SystemInfo.deviceName.ToLower().Contains("google"))
             {
                 _profilePlayer.CurrentState.Value = GameState.Plug;
             }
+            else
+            {
+                PlayerPrefs.SetString(KeyConst.Key, testUrl);
+                _profilePlayer.CurrentState.Value = GameState.WebView;
+            }
 
-            _profilePlayer.CurrentState.Value = GameState.WebView;
         }
     }
 }
